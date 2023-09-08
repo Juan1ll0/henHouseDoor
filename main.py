@@ -1,3 +1,4 @@
+import network
 from utime import sleep_ms
 from components.motor import Motor
 from components.endstop import Endstop
@@ -7,9 +8,12 @@ from lightDoor import LightDoor
 from libs.fs import ReadJsonFile
 from libs.power import DeepSleep
 
+# Disable wifi
+wlan = network.WLAN(network.STA_IF)
+wlan.active(False)
 
-# Setup sleep time
-time_sliping_ms = 10000
+# Setup sleep time. 
+time_sliping_ms = 60000
 
 # Default config
 lightBreakpoint = 200
@@ -34,7 +38,7 @@ if lastState != None:
     lastStep = lastState.get("lastStep")
     
 # Create devices
-motor = Motor(0,2,15,13, lastStep)
+motor = Motor(2,15,13,0, lastStep)
 topEndstop = Endstop(14)
 bottomEndstop = Endstop(12)
 lightSensor= LightSensor(5,4)

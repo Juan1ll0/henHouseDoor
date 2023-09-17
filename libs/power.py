@@ -7,3 +7,7 @@ def DeepSleep(msecs):
   rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
   rtc.alarm(rtc.ALARM0, msecs)
   machine.deepsleep()
+  
+def LightSleep(msecs):
+  print("sssssss.....")
+  machine.lightsleep(msecs)

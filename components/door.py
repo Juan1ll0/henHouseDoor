@@ -56,6 +56,7 @@ class Door:
                 self.motor.setSpeed("SLOW")
         self.motor.setSpeed("FAST")
         UpdateJsonFile("state.json", "lastStep", self.motor.getStep())
+        #self.motor.stop()
         
     def goDown(self):
         print("GoDown")
@@ -68,6 +69,7 @@ class Door:
         self.motor.moveForward(self.overBottom)
         self.motor.setSpeed("FAST")
         UpdateJsonFile("state.json", "lastStep", self.motor.getStep())
+        #self.motor.stop()
                 
     def getPosition(self):
         return self.position

@@ -6,7 +6,7 @@ from components.lightSensor import LightSensor
 from components.door import Door
 from lightDoor import LightDoor
 from libs.fs import ReadJsonFile
-from libs.power import DeepSleep
+from libs.power import DeepSleep, LightSleep
 
 # Disable wifi
 wlan = network.WLAN(network.STA_IF)
@@ -36,7 +36,7 @@ lastState = ReadJsonFile("state.json")
 if lastState != None:
     dimension = lastState.get("dimension")
     lastStep = lastState.get("lastStep")
-    
+
 # Create devices
 motor = Motor(2,15,13,0, lastStep)
 topEndstop = Endstop(14)
@@ -46,9 +46,10 @@ door=Door(motor, topEndstop, bottomEndstop, nearTop, nearBottom, overBottom, dim
 lightDoor=LightDoor(door, lightSensor, lightBreakpoint)
     
 # Execute program
-lightDoor.run()
-sleep_ms(500)
-DeepSleep(time_sliping_ms)
+while True:
+    lightDoor.run()
+    sleep_ms(500)
+    LightSleep(time_sliping_ms)
     
      
 
